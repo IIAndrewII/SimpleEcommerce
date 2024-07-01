@@ -1,0 +1,40 @@
+﻿@model List<Product>
+
+<h2>Shopping Cart</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            decimal totalprice = 0; // Declare and initialize totalprice outside the loop
+        }
+        @foreach (var group in Model.GroupBy(p => p.Id))
+        {
+            var product = group.First(); // Get the first product in the group
+            var quantity = group.Count(); // Count the number of occurrences of the product
+            totalprice = totalprice + (product.Price * quantity); // Update totalprice
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@quantity</td> <!-- Display the quantity of the product -->
+                <td>@(product.Price * quantity)</td> <!-- Calculate the total price -->
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="4">Total:</th>
+            <td>@totalprice</td> <!-- Display the total price -->
+        </tr>
+    </tfoot>
+</table>
+
+<a asp-controller="Receipt" asp-action="Index" class="btn btn-primary">Save Receipt</a>

@@ -1,0 +1,13 @@
+﻿@model Receipt
+
+<h2>Receipt</h2>
+<h3>Please add your location:</h3>
+<form asp-controller="Receipt" asp-action="Save" method="post">
+    <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" class="form-control" id="location" name="location" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Finish</button>
+</form>
+
+

@@ -1,0 +1,48 @@
+﻿@model Receipt
+
+@{
+    ViewBag.Title = "Receipt Details";
+}
+
+<h2>Receipt Details</h2>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Total Price</th>
+        <td>@Model.TotalPrice</td>
+    </tr>
+    <tr>
+        <th>Created At</th>
+        <td>@(Model.CreatedAt.HasValue ? Model.CreatedAt.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
+    </tr>
+    <tr>
+        <th>Location</th>
+        <td>@Model.Location</td>
+    </tr>
+    <tr>
+        <th>Customer</th>
+        <td>@(Model.UserAccount != null ? Model.UserAccount.Email : "N/A")</td>
+    </tr>
+    <tr>
+        <th>Items</th>
+        <td>
+            @if (Model.Items != null && Model.Items.Any())
+            {
+                <ul>
+                    @foreach (var item in Model.Items)
+                    {
+                        <li>Name: @item.Name, Price: @item.Price.ToString("C")</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No items found.</p>
+            }
+        </td>
+    </tr>
+</table>
